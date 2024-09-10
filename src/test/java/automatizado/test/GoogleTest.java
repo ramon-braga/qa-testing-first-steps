@@ -1,17 +1,30 @@
 package automatizado.test;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+
+import automatizado.page.GooglePO;
 
 public class GoogleTest extends BaseTest {
 
-    @Test
-    public void devePesquisarNoGoogle() {
+    private static GooglePO googlePage;
+    @BeforeClass
+    public static void prepararTestes() {
+        googlePage = new GooglePO(driver);
+    }
 
-        WebElement inputPesquisa = driver.findElement(By.name("q"));
-        inputPesquisa.sendKeys("Goku" + Keys.ENTER);
+    @Test
+    public void TC001_devePesquisarNoGoogleOTextoGoku() {
+
+        googlePage.inputPesquisa.clear();
+        googlePage.pesquisar("Goku");
+
+    }
+
+    @Test
+    public void TC002_devePesquisarNoGoogleOTextoVegeta() {
+
+        googlePage.pesquisar("Vegeta");
 
     }
 }
